@@ -10,8 +10,9 @@ exports.send = function(req, res) {
             subject: `gutbomb.net contact form message from ${req.body.emailAddress}`,
             text: req.body.message
         };
-        transporter.sendMail(mailOptions, (e) => {return res.status(500).json({'message': e.response});}, (r) => {return res.json({'status': 'message sent successfully'})});
+        transporter.sendMail(mailOptions, (e) => {console.error(e)}, (r) => {console.log(r)});
+        return res.json({'status': 'message sent successfully'})
     } else {
-        return res.status(500).json({'status': 'no message or sender'});
+        return res.json({'status': 'no message sent'});
     }
 }
