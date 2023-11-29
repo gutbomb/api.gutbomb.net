@@ -27,15 +27,12 @@ app.use(function(req, res, next) {
 const routes = require('./routes/apiRoutes.js');
 routes(app);
 
-if(appConfig.environment === 'production') {
-    app.listen();
-    console.log('gutbomb.net API server started');
+
+if(appConfig.useSSL) {
+    https.createServer(sslOptions, app).listen(port);
+    console.log('secure gutbomb.net API server started on: ' + port);
 } else {
-    if(appConfig.useSSL) {
-        https.createServer(sslOptions, app).listen(port);
-        console.log('secure gutbomb.net API server started on: ' + port);
-    } else {
-        app.listen(port);
-        console.log('gutbomb.net API server started on: ' + port);
-    }
+    app.listen(port);
+    console.log('gutbomb.net API server started on: ' + port);
 }
+
