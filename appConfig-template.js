@@ -1,12 +1,10 @@
 const appConfig = {
     mailConfig: {
-        host: '',
-        port: 465,
+        service: 'iCloud',
         auth: {
           user: '',
           pass: '',
         },
-        secure: true,
         logger: true,
         debug: true,
     },
